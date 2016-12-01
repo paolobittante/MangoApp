@@ -20,8 +20,7 @@ var itemsComponent = (function () {
         this.filterService = filterService;
         //filter component
         this.filtereditems = this.items;
-        this.Item.getItems()
-            .subscribe(function (items) {
+        this.Item.getItems().subscribe(function (items) {
             _this.items = items;
             console.log(items);
         });
@@ -46,10 +45,19 @@ var itemsComponent = (function () {
             title: this.title,
             isDone: false
         };
-        this.Item.addItem(newItem)
-            .subscribe(function (item) {
+        this.Item.addItem(newItem).subscribe(function (item) {
             _this.items.push(item);
             _this.title = '';
+        });
+    };
+    itemsComponent.prototype.updateStatus = function (item) {
+        var _item = {
+            _id: item._id,
+            title: item.title,
+            isDone: !item.isDone
+        };
+        this.Item.updateStatus(_item).subscribe(function (data) {
+            item.isDone = !item.isDone;
         });
     };
     itemsComponent.prototype.deleteItem = function (id) {
@@ -62,16 +70,6 @@ var itemsComponent = (function () {
                     }
                 }
             }
-        });
-    };
-    itemsComponent.prototype.updateStatus = function (item) {
-        var _item = {
-            _id: item._id,
-            title: item.title,
-            isDone: !item.isDone
-        };
-        this.Item.updateStatus(_item).subscribe(function (data) {
-            item.isDone = !item.isDone;
         });
     };
     __decorate([

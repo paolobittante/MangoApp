@@ -25,11 +25,10 @@ export class itemsComponent {
   @ViewChild(FilterComponent) filterComponent: FilterComponent;
 
   constructor(private Item:ItemService, private filterService: FilterService){    
-    this.Item.getItems()
-      .subscribe(items => {
-        this.items = items;
-        console.log(items);
-      })
+    this.Item.getItems().subscribe(items => {
+                          this.items = items;
+                          console.log(items);
+                        })
   }
 
   //the searched string changed
@@ -53,11 +52,22 @@ export class itemsComponent {
       isDone: false
     }
 
-    this.Item.addItem(newItem)
-      .subscribe(item => {
-          this.items.push(item);
-          this.title = '';
-      });
+    this.Item.addItem(newItem).subscribe(item => {
+                                this.items.push(item);
+                                this.title = '';
+                            });
+  }
+  
+   updateStatus(item){
+    var _item = {
+      _id: item._id,
+      title: item.title,
+      isDone: !item.isDone
+    };
+
+    this.Item.updateStatus(_item).subscribe(data =>{
+      item.isDone = !item.isDone;
+    });
   }
 
   deleteItem(id){
@@ -74,15 +84,5 @@ export class itemsComponent {
     });
   }
 
-  updateStatus(item){
-    var _item = {
-      _id: item._id,
-      title: item.title,
-      isDone: !item.isDone
-    };
-
-    this.Item.updateStatus(_item).subscribe(data =>{
-      item.isDone = !item.isDone;
-    });
-  }
+ 
 }

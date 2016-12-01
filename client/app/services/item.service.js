@@ -16,28 +16,23 @@ require('rxjs/add/operator/map');
 var ItemService = (function () {
     function ItemService(http) {
         this.http = http;
-        console.log('item service Initialized...');
     }
     ItemService.prototype.getItems = function () {
-        return this.http.get('/api/items')
-            .map(function (res) { return res.json(); });
+        return this.http.get('/api/items').map(function (res) { return res.json(); });
         //return as an observable
-    };
-    ItemService.prototype.addItem = function (newItem) {
-        var headers = new http_1.Headers();
-        headers.append('Content-Type', 'application/json');
-        return this.http.post('/api/item', JSON.stringify(newItem), { headers: headers })
-            .map(function (res) { return res.json(); });
-    };
-    ItemService.prototype.deleteItem = function (id) {
-        return this.http.delete('/api/item/' + id)
-            .map(function (res) { return res.json(); });
     };
     ItemService.prototype.updateStatus = function (item) {
         var headers = new http_1.Headers();
         headers.append('Content-Type', 'application/json');
-        return this.http.put('/api/item/' + item._id, JSON.stringify(item), { headers: headers })
-            .map(function (res) { return res.json(); });
+        return this.http.put('/api/item/' + item._id, JSON.stringify(item), { headers: headers }).map(function (res) { return res.json(); });
+    };
+    ItemService.prototype.addItem = function (newItem) {
+        var headers = new http_1.Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post('/api/item', JSON.stringify(newItem), { headers: headers }).map(function (res) { return res.json(); });
+    };
+    ItemService.prototype.deleteItem = function (id) {
+        return this.http.delete('/api/item/' + id).map(function (res) { return res.json(); });
     };
     ItemService = __decorate([
         core_1.Injectable(), 
