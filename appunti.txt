@@ -1,0 +1,7 @@
+APPUNTI MANGO 
+
+mLab per i database
+
+una volta settato la connessione e le procedure con il database abbiamo una restfull api 
+
+per bootstrap e grafiche installo BOWER

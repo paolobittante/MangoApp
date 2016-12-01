@@ -1,0 +1,24 @@
+<form class="well" (submit)="addItem($event)">
+    <div class="form-group">
+        <input type="text" [(ngModel)]="title" name="title" class="form-control" placeholder="Add item..">
+    </div>
+</form>
+
+<!--
+<filter-text (changed)="filterChanged($event)"></filter-text>-->
+
+
+<div class="row">
+    <div class="col-md-6" *ngFor="let item of items">
+        <div [class]="getItemClass(item)">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{item.title}}</h3>
+            </div>
+            <div class="panel-body">
+                <span class="glyphicon glyphicon-ok" *ngIf="!item.isDone" (click)="updateStatus(item)"></span>
+                <span class="glyphicon glyphicon-remove" *ngIf="item.isDone" (click)="updateStatus(item)"></span>
+                <input type="button" value="Delete" (click)="deleteItem(item._id)" class="btn btn-danger pull-right">
+            </div>
+        </div>
+    </div>
+</div>
